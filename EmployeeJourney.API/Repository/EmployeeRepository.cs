@@ -1,14 +1,14 @@
+using System.Data.Common;
 using Dapper;
 using EmployeeJourney.API.Common;
 using EmployeeJourney.API.Models;
 using EmployeeJourney.API.SQL;
-using MySql.Data.MySqlClient;
 
 namespace EmployeeJourney.API.Repository;
 
 class EmployeeRepository : IEmployeeRepository
 {
-    private readonly MySqlConnection _connection;
+    private readonly DbConnection _connection;
     public EmployeeRepository(DatabaseConnection connection)
     {
         _connection = connection.GetConnection();

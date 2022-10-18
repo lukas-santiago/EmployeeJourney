@@ -24,22 +24,21 @@ internal class GlobalErrorHandlerMiddleware
         }
     }
 
-    private Task HandleExceptionAsync(HttpContext context, Exception exception)
+    private static Task HandleExceptionAsync(HttpContext context, Exception exception)
     {
 
         HttpStatusCode status = HttpStatusCode.InternalServerError;
         string errorMessage = exception.Message;
-        //string stackTrace = exception.StackTrace == null ? "" : exception.StackTrace.ToString();
+        string stackTrace = exception.StackTrace == null ? "" : exception.StackTrace.ToString();
 
         if (exception is BaseException)
         {
             status = HttpStatusCode.BadRequest;
         }
 
-        var result = JsonSerializer.Serialize(new { status, errorMessage }); //, stackTrace });
+        var result = JsonSerializer.Serialize(new { status, errorMessage , stackTrace });
         context.Response.ContentType = "application/json";
         context.Response.StatusCode = 401;
-        
         return context.Response.WriteAsync(result);
     }
 }
