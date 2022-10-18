@@ -12,33 +12,66 @@ class EmployeeRepository : IEmployeeRepository
     public EmployeeRepository(DatabaseConnection connection)
     {
         _connection = connection.GetConnection();
-
     }
-
-    public Task<Employee> add(Employee employee)
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task<Employee> delete(Employee employee)
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task<Employee> edit(Employee employee)
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task<Employee> get(int id_employee)
-    {
-        throw new NotImplementedException();
-    }
-
     public async Task<IEnumerable<Employee>> getAll()
     {
-
-        var employees = await _connection.QueryAsync<Employee>(EmployeeSQL.SELECT_ALL);
-        return employees;
+        var result = await _connection.QueryAsync<Employee>(EmployeeSQL.SELECT_ALL);
+        return result;
+    }
+    public async Task<Employee> get(int id_employee)
+    {
+        var parameters = new
+        {
+            id_employee
+        };
+        var result = await _connection.QueryFirstAsync<Employee>(EmployeeSQL.SELECT, parameters);
+        return result;
+    }
+    public async Task<int> add(Employee employee)
+    {
+        var parameters = new
+        {
+            id_employee = employee.id_employee,
+            username = employee.username,
+            first_name = employee.first_name,
+            last_name = employee.last_name,
+            email = employee.email,
+            phone = employee.phone,
+            gender = employee.gender,
+            address = employee.address,
+            department = employee.department,
+            password = employee.password,
+            abou = employee.about
+        };
+        var result = await _connection.ExecuteAsync(EmployeeSQL.INSERT, parameters);
+        return result;
+    }
+    public async Task<int> edit(Employee employee)
+    {
+        var parameters = new
+        {
+            id_employee = employee.id_employee,
+            username = employee.username,
+            first_name = employee.first_name,
+            last_name = employee.last_name,
+            email = employee.email,
+            phone = employee.phone,
+            gender = employee.gender,
+            address = employee.address,
+            department = employee.department,
+            password = employee.password,
+            abou = employee.about
+        };
+        var result = await _connection.ExecuteAsync(EmployeeSQL.UPDATE, parameters);
+        return result;
+    }
+    public async Task<int> delete(int id_employee)
+    {
+        var parameters = new
+        {
+            id_employee
+        };
+        var result = await _connection.ExecuteAsync(EmployeeSQL.DELETE, parameters);
+        return result;
     }
 }
