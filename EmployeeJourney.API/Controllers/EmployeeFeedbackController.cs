@@ -5,12 +5,12 @@ using Microsoft.AspNetCore.Mvc;
 namespace EmployeeJourney.API.Controllers;
 
 [ApiController]
-[Route("api/employee/")]
-public class EmployeeController : ControllerBase
+[Route("api/employee-feedback/")]
+public class EmployeeFeedbackController : ControllerBase
 {
-    private readonly IEmployeeRepository _repository;
+    private readonly IEmployeeFeedbackRepository _repository;
 
-    public EmployeeController(IEmployeeRepository repository)
+    public EmployeeFeedbackController(IEmployeeFeedbackRepository repository)
     {
         _repository = repository;
     }
@@ -25,12 +25,12 @@ public class EmployeeController : ControllerBase
         return Ok(await _repository.get(id_employee));
     }
     [HttpPost]
-    public async Task<IActionResult> Add(Employee employee)
+    public async Task<IActionResult> Add(EmployeeFeedback employee)
     {
         return Ok(await _repository.add(employee));
     }
     [HttpPut]
-    public async Task<IActionResult> Edit(Employee employee)
+    public async Task<IActionResult> Edit(EmployeeFeedback employee)
     {
         return Ok(await _repository.edit(employee));
     }
