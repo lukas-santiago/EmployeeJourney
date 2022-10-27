@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace EmployeeJourney.API.Controllers;
 
 [ApiController]
-[Route("api/employee-journey-map/")]
+[Route("api/v1/employee-journey-map/")]
 public class EmployeeJourneyMapController : ControllerBase
 {
     private readonly IEmployeeJourneyMapRepository _repository;

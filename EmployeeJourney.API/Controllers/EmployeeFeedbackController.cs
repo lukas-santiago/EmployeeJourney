@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace EmployeeJourney.API.Controllers;
 
 [ApiController]
-[Route("api/employee-feedback/")]
+[Route("api/v1/employee-feedback/")]
 public class EmployeeFeedbackController : ControllerBase
 {
     private readonly IEmployeeFeedbackRepository _repository;

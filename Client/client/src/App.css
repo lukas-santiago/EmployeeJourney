@@ -1,0 +1,14 @@
+.App {
+  display: flex;
+  flex-wrap: nowrap;
+  height: 100vh;
+  max-height: 100vh;
+  overflow: hidden;
+}
+
+#sidebar {
+    width: 25rem;
+}
+#sidebar .active {
+    color: white !important;
+}
