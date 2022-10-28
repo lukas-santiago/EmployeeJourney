@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Button, Modal } from 'react-bootstrap'
+import { Link } from 'react-router-dom'
 
 export function EmployeePage() {
   const [rowData, setRowData] = useState([])
@@ -36,45 +37,31 @@ export function EmployeePage() {
 
   return (
     <div>
-      <h1 className='display-4'>Gestão de Funcionário</h1>
+      <h1 className='display-4 mb-5'>Gestão de Funcionário</h1>
       {/* <p>Gerir funcionários</p> */}
       <div className='d-flex justify-content-end w-100'>
-        <button className='btn btn-success'>Adicionar</button>
+        <Link to='/employee/0' className='btn btn-success'>Adicionar</Link>
       </div>
       <table className='table table-striped'>
         <thead>
           <tr>
             <th>#</th>
             <th>Name</th>
-            <td>Email</td>
-            <th width='150px' className='text-center'>
-              Ações
-            </th>
+            <th>Email</th>
           </tr>
         </thead>
         <tbody>
           {
-            //
             rowData.map((row, rowIndex) => (
-              <tr key={`row-${rowIndex}`}>
+              <tr key={`row-${rowIndex}`} onClick={() => location.href = location.href + '/' + row.id_employee}>
                 <td>{row.id_employee}</td>
                 <td>{row.first_name + ' ' + row.last_name}</td>
                 <td>{row.email}</td>
-                <td className='d-flex gap-2 p-1'>
-                  <button className='btn btn-primary' onClick={() => editAction(row)}>
-                    Edit
-                  </button>
-                  <button className='btn btn-danger' onClick={() => deleteAction(row)}>
-                    Delete
-                  </button>
-                </td>
               </tr>
             ))
           }
         </tbody>
       </table>
-      <DialogEditFormEmployee data={selectedRow} show={showFormDialog} setShow={setShowFormDialog} />
-      <DialogDeleteEmployee show={showDeleteDialog} setShow={setShowDeleteDialog} />
     </div>
   )
 }
